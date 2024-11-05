@@ -1,0 +1,3 @@
+#arquivo de configuração do gitHub
+#consigo retirar qualquer arquivo para ser ignorado e não ir para o gitHub
+/node_modules
