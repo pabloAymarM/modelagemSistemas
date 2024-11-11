@@ -9,17 +9,22 @@ const porta = 5000
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+//configurando o handlebars
+app.engine('handlebars', handlebars.engine.apply({extend:true}))
+app.set('view engine', 'handlebars')//definindo o handlebars comoo mecanismo de visualização padrão
+
 //carregando rotas
 const funcionarioRouter = require('./routes/funcionario')
 
 //utilizando rotas
 app.use('/funcionario', funcionarioRouter)
 
-app.get('/', function(){
-    res.send('<h1>Tudo Funcionando!</h1>')
+//exibir informações na tela
+app.get('/', function(req, res){
+    res.render('home')
 })
 
 //executando o servidor
-app.listen(porta, function(){
+app.listen(porta, function(){   
     console.log('Servidor executado na porta:', porta)
 })
