@@ -24,14 +24,15 @@
             <label for="departamento">Escolha o Departamento do Funcionário</label>
             <select name="departamento" id="departamento" class="form-select">
                 <option value="">Escolha uma opção...</option>
-                <option value="1">Recursos Humanos</option>
-                <option value="2">Financeiro</option>
+                {{#each dados}}
+                <option value="{{   dataValues.id}}">{{dataValues.nome}}</option>
+                {{/each}}
             </select>
         </section>
 
         {{!--Campo 4: Botão de cadastrar--}}
         <section class="mb-2 d-flex justify-content-end">
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button href="/funcionario/show" class="btn btn-primary" type="submit">Cadastrar</button>
         </section>
     </form>
 </section>

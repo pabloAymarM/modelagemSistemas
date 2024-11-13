@@ -23,15 +23,16 @@ router.post('/store', async function(req, res){ //o sequelize recebe o conteúdo
 })
 
 //2 - exibir página raíz de funcionario
-router.get('/', function(req, res){
-    res.send('<h1>Página Inicial de Funcionário</h1>')
+router.get('/show', function(req, res){
+    res.render('funcionario/index')
 })
 
 //3 - consultar Db
-router.get('/show', async function(req, res){
-    let resultado = await funcionario.findAll()
+router.get('/', async function(req, res){
+    let resultado = await funcionario.findAll({include:departmamento}) //o include é como o sequelize faz para realizar consultas com join
     if(resultado){
         console.log(resultado)
+        res.render('funcionario/index',{dados:resultado})
     }
     else{
         console.log('Não foi possível exibir os dados.')
@@ -46,10 +47,19 @@ router.get('/destroy/:id', async function(req, res){
             id:req.params.id //recebendo o id via parâmetro que está na rota
         }
     })
+    res.redirect('/funcionario')
 })
 
 //5 - exibir formulário de cadastro
-router.get('/create', function(req, res){
+router.get('/create', async function(req, res){
+    let resultado = await departamento.findAll()
+    if(resultado){
+        console.log(resultado)
+        res.render('funcionario/addFuncionario', {dados:resultado})
+    }else{
+        console.log('Não foi possível carregar nenhum dado.')
+        res.redirect('/') //redirecionando para a página inicial
+    }
     res.render('funcionario/addFuncionario')
 })
 

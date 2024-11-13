@@ -15,7 +15,6 @@ app.set('view engine', 'handlebars')//definindo o handlebars comoo mecanismo de 
 
 //carregando rotas
 const funcionarioRouter = require('./routes/funcionario')
-
 //utilizando rotas
 app.use('/funcionario', funcionarioRouter)
 
